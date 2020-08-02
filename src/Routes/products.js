@@ -6,8 +6,8 @@ const productsController = require("../Controllers/products");
 const productsRouter = express.Router();
 
 productsRouter.get("/products", middlewareEx, productsController.getAllProducts);
-productsRouter.get("/product/orderbyprice", middlewareEx, productsController.getProductByPrice);
 productsRouter.get("/product/orderbycategory", middlewareEx, productsController.getProductByCategory);
+productsRouter.get("/product/orderbyprice", middlewareEx, productsController.getProductByPrice);
 productsRouter.get("/product/orderbynew", middlewareEx, productsController.getProductByCreatedAt);
 productsRouter.post("/add", middlewareEx, productsController.postNewProduct);
 productsRouter.patch("/update", middlewareEx, productsController.updateProduct);

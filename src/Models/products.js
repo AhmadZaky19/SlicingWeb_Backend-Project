@@ -47,7 +47,7 @@ const productsModel = {
   getProductByCreatedAt: () => {
     return new Promise((resolve, reject) => {
       const queryString =
-        "SELECT product.id_product, product.name_product, category.name_category, product.price_product, product.img_product, product.created_at FROM product JOIN category ON product.id_category = category.id_category ORDER BY product.created_at";
+        "SELECT product.id_product, product.name_product, category.name_category, product.price_product, product.img_product, product.created_at FROM product JOIN category ON product.id_category = category.id_category ORDER BY product.created_at DESC";
       db.query(queryString, (err, data) => {
         if (!err) {
           resolve(data);
@@ -102,6 +102,7 @@ const productsModel = {
       });
     });
   },
+  // SEARCH
   searchProduct: (product) => {
     const queryString =
       `SELECT product.id_product, product.name_product, category.name_category, product.price_product, product.img_product, product.created_at FROM product JOIN category ON product.id_category = category.id_category WHERE product.name_product LIKE '%${product}%'`;
