@@ -1,10 +1,10 @@
-const categoriesModel = require("../Models/categories");
+const historiesModel = require("../Models/histories");
 const formResponse = require("../Helpers/forms/formResponse");
 
-const categoriesController = {
-  getAllCategories: (_, res) => {
-    categoriesModel
-      .getCategory()
+const historiesController = {
+  getAllHistories: (_, res) => {
+    historiesModel
+      .getHistory()
       .then((data) => {
         formResponse.success(res, data);
       })
@@ -14,4 +14,4 @@ const categoriesController = {
   },
 };
 
-module.exports = categoriesController;
+module.exports = historiesController;

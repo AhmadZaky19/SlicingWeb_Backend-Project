@@ -6,7 +6,7 @@ const productsController = {
     productsModel
       .getAllProducts()
       .then((data) => {
-        formResponse.succes(res, data);
+        formResponse.success(res, data);
       })
       .catch((err) => {
         formResponse.error(res, err);
@@ -14,9 +14,9 @@ const productsController = {
   },
   getProductByCategory: (req, res) => {
     productsModel
-      .getProductByCategory()
+      .getProductByCategory(req.params.id_category)
       .then((data) => {
-        formResponse.succes(res, data);
+        formResponse.success(res, data);
       })
       .catch((err) => {
         formResponse.error(res, err);
@@ -24,9 +24,9 @@ const productsController = {
   },
   getProductByPrice: (req, res) => {
     productsModel
-      .getProductByPrice()
+      .getProductByPrice(req.params.price_product)
       .then((data) => {
-        formResponse.succes(res, data);
+        formResponse.success(res, data);
       })
       .catch((err) => {
         formResponse.error(res, err);
@@ -34,9 +34,9 @@ const productsController = {
   },
   getProductByCreatedAt: (req, res) => {
     productsModel
-      .getProductByCreatedAt()
+      .getProductByCreatedAt(req.params.created_at)
       .then((data) => {
-        formResponse.succes(res, data);
+        formResponse.success(res, data);
       })
       .catch((err) => {
         formResponse.error(res, err);
@@ -49,10 +49,13 @@ const productsController = {
         const responseData = {
           ...req.body,
           id_product: data.insertId,
+          created_at: Date.now(),
         };
-        formResponse.succes(res, responseData);
+        console.log(responseData);
+        formResponse.success(res, responseData);
       })
       .catch((err) => {
+        console.log(err);
         formResponse.error(res, err);
       });
   },
@@ -63,17 +66,17 @@ const productsController = {
         const responseData = {
           ...req.body,
         };
-        formResponse.succes(res, responseData);
+        formResponse.success(res, responseData);
       })
       .catch((err) => {
-        formResponse.error(res_err);
+        formResponse.error(res, err);
       });
   },
   deleteProduct: (req, res) => {
     productsModel
       .deleteProduct(req.params.id)
       .then((data) => {
-        formResponse.succes(res, data);
+        formResponse.success(res, data);
       })
       .catch((err) => {
         formResponse.error(res, err);
@@ -83,7 +86,7 @@ const productsController = {
     productsModel
       .searchProduct(req.params.product)
       .then((data) => {
-        formResponse.succes(res, data);
+        formResponse.success(res, data);
       })
       .catch((err) => {
         formResponse.error(res, err);
