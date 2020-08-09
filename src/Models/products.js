@@ -5,7 +5,7 @@ const productsModel = {
   getAllProducts: () => {
     return new Promise((resolve, reject) => {
       const queryString =
-        "SELECT product.id_product, product.name_product, category.name_category, product.price_product, product.img_product, product.created_at FROM product JOIN category ON product.id_category = category.id_category ORDER BY product.name_product ASC";
+        "SELECT product.id_product, product.name_product, category.name_category, product.price_product, product.img_product, product.created_at FROM product JOIN category ON product.id_category = category.id_category";
       db.query(queryString, (err, data) => {
         if (!err) {
           resolve(data);
@@ -15,7 +15,7 @@ const productsModel = {
       });
     });
   },
-  // SORT BY CATEGORY 
+  // SORT BY CATEGORY
   getProductByCategory: () => {
     const queryString =
       "SELECT product.id_product, product.name_product, category.name_category, product.price_product, product.img_product, product.created_at FROM product JOIN category ON product.id_category = category.id_category ORDER BY product.id_category";
@@ -57,13 +57,16 @@ const productsModel = {
       });
     });
   },
-//  INSERT
+  //  INSERT
   postNewProduct: (body) => {
-    const {name_product, id_category, price_product, img_product } = body;
+    const { name_product, id_category, price_product, img_product } = body;
     const queryString =
       "INSERT INTO product SET name_product =?, id_category =?, price_product =?, img_product =?";
     return new Promise((resolve, reject) => {
-      db.query(queryString, [name_product, id_category, price_product, img_product], (err, data) => {
+      db.query(
+        queryString,
+        [name_product, id_category, price_product, img_product],
+        (err, data) => {
           if (!err) {
             resolve(data);
           } else {
@@ -75,11 +78,20 @@ const productsModel = {
   },
   // UPDATE
   updateProduct: (body) => {
-    const {id_product, name_product, id_category, price_product, img_product} = body;
+    const {
+      id_product,
+      name_product,
+      id_category,
+      price_product,
+      img_product,
+    } = body;
     const queryString =
       "UPDATE product SET name_product=?, id_category=?, price_product=?, img_product=? WHERE id_product=?";
     return new Promise((resolve, reject) => {
-      db.query(queryString, [name_product, id_category, price_product, img_product, id_product], (err, data) => {
+      db.query(
+        queryString,
+        [name_product, id_category, price_product, img_product, id_product],
+        (err, data) => {
           if (!err) {
             resolve(data);
           } else {
@@ -104,8 +116,7 @@ const productsModel = {
   },
   // SEARCH
   searchProduct: (product) => {
-    const queryString =
-      `SELECT product.id_product, product.name_product, category.name_category, product.price_product, product.img_product, product.created_at FROM product JOIN category ON product.id_category = category.id_category WHERE product.name_product LIKE '%${product}%'`;
+    const queryString = `SELECT product.id_product, product.name_product, category.name_category, product.price_product, product.img_product, product.created_at FROM product JOIN category ON product.id_category = category.id_category WHERE product.name_product LIKE '%${product}%'`;
     return new Promise((resolve, reject) => {
       db.query(queryString, (err, data) => {
         if (!err) {

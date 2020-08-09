@@ -1,5 +1,5 @@
 const categoriesModel = require("../Models/categories");
-const formResponse = require("../Helpers/forms/formResponse");
+const formResponse = require("../Helpers/Forms/formResponse");
 
 const categoriesController = {
   getAllCategories: (_, res) => {

@@ -1,5 +1,5 @@
 const productsModel = require("../Models/products");
-const formResponse = require("../Helpers/forms/formResponse");
+const formResponse = require("../Helpers/Forms/formResponse");
 
 const productsController = {
   // ALL
