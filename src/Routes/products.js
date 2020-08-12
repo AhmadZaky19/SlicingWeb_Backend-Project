@@ -7,10 +7,8 @@ const productsRouter = express.Router();
 productsRouter.get("/", productsController.getAllProducts);
 productsRouter.post("/", productsController.postNewProduct);
 productsRouter.patch("/", productsController.updateProduct);
-productsRouter.get("/product/orderbycategory", productsController.getProductByCategory);
-productsRouter.get("/product/orderbyprice", productsController.getProductByPrice);
-productsRouter.get("/product/orderbynew", productsController.getProductByCreatedAt);
+productsRouter.get("/sortproductby", productsController.sortProductBy);
 productsRouter.delete("/delete/:id", productsController.deleteProduct);
-productsRouter.get("/search/:product", productsController.searchProduct);
+productsRouter.get("/search", productsController.searchProduct);
 
 module.exports = productsRouter;

@@ -1,8 +1,10 @@
 require("dotenv").config();
+
 const express = require("express");
 const bodyParser = require("body-parser"); 
 const logger = require("morgan");
 const indexRouter = require("./src/Routes/index");
+
 const cors = require("cors");
 
 const app = express();

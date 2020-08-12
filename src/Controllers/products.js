@@ -7,43 +7,21 @@ const productsController = {
     productsModel
       .getAllProducts()
       .then((data) => {
-        formResponse.success(res, data);
+        formResponse.success(res, data, 200);
       })
       .catch((err) => {
-        formResponse.error(res, err);
+        formResponse.error(res, err, 500);
       });
   },
-  // BY CATEGORY
-  getProductByCategory: (req, res) => {
+  // SORT PRODUCT BY
+  sortProductBy: (req, res) => {
     productsModel
-      .getProductByCategory(req.params.id_category)
+      .sortProductBy(req.query)
       .then((data) => {
-        formResponse.success(res, data);
+        formResponse.success(res, data, 200);
       })
       .catch((err) => {
-        formResponse.error(res, err);
-      });
-  },
-  // BY PRICE
-  getProductByPrice: (req, res) => {
-    productsModel
-      .getProductByPrice(req.params.price_product)
-      .then((data) => {
-        formResponse.success(res, data);
-      })
-      .catch((err) => {
-        formResponse.error(res, err);
-      });
-  },
-  // BY NEWEST
-  getProductByCreatedAt: (req, res) => {
-    productsModel
-      .getProductByCreatedAt(req.params.created_at)
-      .then((data) => {
-        formResponse.success(res, data);
-      })
-      .catch((err) => {
-        formResponse.error(res, err);
+        formResponse.error(res, err, 500);
       });
   },
   // ADD
@@ -57,11 +35,11 @@ const productsController = {
           created_at: Date.now(),
         };
         console.log(responseData);
-        formResponse.success(res, responseData);
+        formResponse.success(res, responseData, 201);
       })
       .catch((err) => {
         console.log(err);
-        formResponse.error(res, err);
+        formResponse.error(res, err, 500);
       });
   },
   // UPDATE
@@ -72,10 +50,10 @@ const productsController = {
         const responseData = {
           ...req.body,
         };
-        formResponse.success(res, responseData);
+        formResponse.success(res, responseData, data, 201);
       })
       .catch((err) => {
-        formResponse.error(res, err);
+        formResponse.error(res, err, 500);
       });
   },
   // DELETE
@@ -83,16 +61,21 @@ const productsController = {
     productsModel
       .deleteProduct(req.params.id)
       .then((data) => {
-        formResponse.success(res, data);
+        const responseData = {
+          id: data.insertId,
+          ...req.body,
+          msg: `delete product with id: ${req.params.id} was successful`,
+        };
+        formResponse.success(res, responseData, data, 200);
       })
       .catch((err) => {
-        formResponse.error(res, err);
+        formResponse.error(res, err, 500);
       });
   },
   // SEARCH
   searchProduct: (req, res) => {
     productsModel
-      .searchProduct(req.params.product)
+      .searchProduct(req.query.name_product)
       .then((data) => {
         formResponse.success(res, data);
       })
